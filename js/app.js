@@ -8,6 +8,9 @@ let descripcion; //Se usa para describir el clima en iconWeather()
 let nombDia; //Se usa para almacenar el dia traducido en la funcion translate()
 let nombMes; //Se usa para almacenar el mes traducido en la funcion translate()
 
+let latitud; //Se usa para almacenar la latitud enviada por la API OpenWeather y ser usada en calidadAire();
+let longitud; //Se usa para almacenar la latitud enviada por la API OpenWeather y ser usada en calidadAire();
+
 /****************************************/
 /*************** Selectores *************/
 /****************************************/
@@ -51,11 +54,14 @@ function buscarClima(evt){
         return;
     };
 
+    //Evita error 401 por envio incorrecto de url de la API OpenWeather; ciudades con espacio ej: Hong Kong devuelve Hong+kong
+    let ciudadUrl = ciudad.replace(/ /g,"+");
+
     //Se llama la funcion que accede a la API de OpenWeather
-    consultarAPIClima(ciudad,pais);
+    consultarAPIClima(ciudadUrl,pais);
 
     //Se llama la funcion que accede a la API de IPGeolocation
-    consultarIpGeolocation(ciudad,pais);
+    consultarIpGeolocation(ciudadUrl,pais);
 
 };
 
@@ -96,7 +102,7 @@ function consultarAPIClima(ciudad,pais){
     const appID= '034cfc616cddb484c19e94de0e5e731f'; //KeyAPI de openweathermap
     const urlOpenWeather = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appID}`;
 
-    //console.log(urlOpenWeather); //Muestra la url que accede al json, que contiene la informacion.
+    console.log(urlOpenWeather); //Muestra la url que accede al json, que contiene la informacion.
 
     spinner();
 
@@ -140,21 +146,30 @@ function consultarIpGeolocation (ciudad,pais){
 
 }
 
+//Esta funcion verifica si hay conexion y los datos del API OpenWeather Air Pollution fueron entregados correctamente
+
+
+
 //Esta funcion hace destructuring al json que recibe y muestra en el html
 function mostrarClima(datos){
                 //Realizar un destructuring de 2do nivel     //Realizar un destructuring con arreglos
-    const {name, main: {temp, feels_like,temp_min,temp_max}, weather:{0:{icon}}, dt} = datos;
+    const {name, main: {temp, feels_like,temp_min,temp_max}, weather:{0:{icon}}, dt, coord: {lon,lat}} = datos;
     
     const celsius = kelvinCelsius(temp); // Llamamos a la funcion kelvinCelsius
     const feels = kelvinCelsius(feels_like);
     const tMin = kelvinCelsius(temp_min);
     const tMax = kelvinCelsius(temp_max);
     icono = icon;
+
+    latitud = lat;
+    longitud = lon;
     
     //console.log(celsius); //Mostramos en clg la conversion de temperatura de los datos.
     //console.log(feels);
     //console.log(tMin);
     //console.log(tMax);
+    console.log(lon);
+    console.log(lat);
 
     iconWeather(); // Se llama la funcion iconWeather
 
