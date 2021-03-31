@@ -8,9 +8,6 @@ let descripcion; //Se usa para describir el clima en iconWeather()
 let nombDia; //Se usa para almacenar el dia traducido en la funcion translate()
 let nombMes; //Se usa para almacenar el mes traducido en la funcion translate()
 
-let latitud; //Se usa para almacenar la latitud enviada por la API OpenWeather y ser usada en calidadAire();
-let longitud; //Se usa para almacenar la latitud enviada por la API OpenWeather y ser usada en calidadAire();
-
 /****************************************/
 /*************** Selectores *************/
 /****************************************/
@@ -61,7 +58,7 @@ function buscarClima(evt){
     consultarAPIClima(ciudadUrl,pais);
 
     //Se llama la funcion que accede a la API de IPGeolocation
-    consultarIpGeolocation(ciudadUrl,pais);
+    consultarIpGeolocation(ciudadUrl,pais); 
 
 };
 
@@ -129,7 +126,7 @@ function consultarIpGeolocation (ciudad,pais){
     const appGeoID= '025d2e92e55040dab74487eeecad9005' //KeyAPI de IPGeolocation
     const urlIpGeo= `https://api.ipgeolocation.io/timezone?apiKey=${appGeoID}&location=${ciudad},%20${pais}`;
 
-    //console.log(urlIpGeo); //Muestra la url que accede al json, que contiene la informacion.
+    console.log(urlIpGeo); //Muestra la url que accede al json, que contiene la informacion.
 
     fetch(urlIpGeo)
     .then(respuestaGeo => respuestaGeo.json())
@@ -146,8 +143,28 @@ function consultarIpGeolocation (ciudad,pais){
 
 }
 
-//Esta funcion verifica si hay conexion y los datos del API OpenWeather Air Pollution fueron entregados correctamente
+//Esta funcion verifica si hay conexion y los datos de la API IQAir fueron entregados correctamente
+function consultarCalidadAir(latitud,longitud){
+    const appAqiID = 'b6eebd88-c262-43c7-bf68-7dda51d366ed'; //KeyAPI de IQAir API;
+    const urlCalidadAir = `http://api.airvisual.com/v2/nearest_city?lat=${latitud}&lon=${longitud}&key=${appAqiID}`;
+    
+    console.log(urlCalidadAir);
 
+    fetch(urlCalidadAir)
+    .then(respuestaAqi => respuestaAqi.json())
+    .then(datosAqi =>{
+
+        if(datosAqi.status !== "success"){
+
+            mostrarError("Datos no encontrados de ICA");
+            return;
+        };
+
+        mostrarAqi(datosAqi);
+
+    });
+
+};
 
 
 //Esta funcion hace destructuring al json que recibe y muestra en el html
@@ -161,15 +178,20 @@ function mostrarClima(datos){
     const tMax = kelvinCelsius(temp_max);
     icono = icon;
 
-    latitud = lat;
-    longitud = lon;
+    const  latitud = lat;
+    const longitud = lon;
+
+    
+    consultarCalidadAir(latitud,longitud); //Se llama la funcion consultarCalidadAir(latitud,longitud).
+                                           //NO se inicia en la funcion buscarClima(), ya que se necesita primero adquirir los datos de la API OpenWeather
+
     
     //console.log(celsius); //Mostramos en clg la conversion de temperatura de los datos.
     //console.log(feels);
     //console.log(tMin);
     //console.log(tMax);
-    console.log(lon);
-    console.log(lat);
+    //console.log(lon);
+    //console.log(lat);
 
     iconWeather(); // Se llama la funcion iconWeather
 
@@ -238,7 +260,7 @@ function mostrarClima(datos){
     resultadoDiv.appendChild(divSegundaCol);
 
     //Se agrega al div padre con id resultado
-    viewResultado.appendChild(resultadoDiv); //Mostramos lo almacenado en el div padre
+    viewResultado.appendChild(resultadoDiv); //Mostramos lo almacenado en el div padre    
 
 };
 
@@ -271,6 +293,31 @@ function mostrarIpGeo(dato){
     
     viewResultado.appendChild(horaLocal); //Mostramos lo almacenado en el div padre
 
+
+};
+
+
+//Esta funcion hace destructuring al json que recibe de la API IQAir y muestra en el html
+function mostrarAqi(datosAir){
+    const {data: {current: { pollution: {aqius}}}} = datosAir; //Destructuring a un json con datos de tercer nivel.
+
+    //console.log(aqius); //Se uso para verificar el dato que llega del json en la variable aqius.
+
+    const divIconAQI = document.createElement('div');
+    divIconAQI.id = "IconoHoja"
+    divIconAQI.innerHTML = `<span class="iconify" data-icon="fa-solid:leaf" data-inline="false"></span>`;
+
+    const parrAqi = document.createElement('p'); //Se crea un elemento parrafo que va a contener el mensaje de -> ICA #
+    parrAqi.innerHTML = `ICA &nbsp ${aqius}`;
+
+    const divAqi = document.createElement('div'); //Se crea el div que contiene el parrafo de ICA. Este div va a ser otro hijo del div con id resultado
+
+    divAqi.appendChild(divIconAQI);
+    divAqi.appendChild(parrAqi); //Se agregan hijos al div
+    divAqi.id = "AQI"; //Se da un id al div de AQI
+    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base');
+
+    viewResultado.appendChild(divAqi);    //Mostramos lo almacenado en el div padre
 
 };
 
