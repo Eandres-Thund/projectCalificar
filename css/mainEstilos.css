@@ -111,17 +111,29 @@ main #resultado img{
 .alerta{
 	position:relative;
 	padding: 12px 20px;
-	margin-top: 16px;
 	border:1px solid transparent;
 	border-radius: 4px;
 }
 
-.alerta-danger{
+.alerta-error{
 	color:#721c24;
 	background-color:#f8d7da;
 	border-color:#f5c6cb;
-	letter-spacing: .5px;
 }
+
+/* * ============================== */
+/* * ======== ALARMA ICA ========== */
+/* * ============================== */
+
+#alarmaICA{
+  position: relative;
+  max-width: 120px;  
+  left: 190px;
+  border:1px solid transparent;
+	border-radius: 4px;
+}
+
+
 
 /* * ============================== */
 /* * ==== COLOCAR ELEMENTOS DE ==== */

@@ -51,7 +51,7 @@ function buscarClima(evt){
         return;
     };
 
-    //Evita error 401 por envio incorrecto de url de la API OpenWeather; ciudades con espacio ej: Hong Kong devuelve Hong+kong
+    //Evita error 401 por envio incorrecto de url en las APIs (particular: OpenWeather); ciudades con espacio ej: Hong Kong devuelve Hong+kong
     let ciudadUrl = ciudad.replace(/ /g,"+");
 
     //Se llama la funcion que accede a la API de OpenWeather
@@ -74,7 +74,7 @@ function mostrarError(msj){
         //Crear alerta con scripting para que aparezca en el html.
         const alerta = document.createElement('div');
 
-        alerta.classList.add('alerta', 'alerta-danger', 'max-w-md', 'mx-auto', 'text-center');
+        alerta.classList.add('alerta', 'mt-4', 'alerta-error', 'tracking-wide', 'max-w-md', 'mx-auto', 'text-center');
                                 //Se añaden clases del mainEstilos.css y tailwind.css
         
         alerta.innerHTML = `
@@ -249,13 +249,6 @@ function mostrarClima(datos){
     const resultadoDiv = document.createElement('div'); //Se crea un segundo div padre para el div hijo
     resultadoDiv.classList.add('text-white', 'text-center', 'fila'); //Anexa clases de tailwind y una del mainEstilos
 
-    //resultadoDiv.appendChild(nombreCiudad);  //Agregamos el div hijo al div padre
-    //resultadoDiv.appendChild(temperatura);
-    //resultadoDiv.appendChild(minMax);
-    //resultadoDiv.appendChild(sensacion);
-    //resultadoDiv.appendChild(divImagen);
-    //resultadoDiv.appendChild(descripcionClima);
-
     resultadoDiv.appendChild(divPrimeraCol);
     resultadoDiv.appendChild(divSegundaCol);
 
@@ -331,13 +324,27 @@ function mostrarAqi(datosAir){
     parrAqi.innerHTML = `ICA &nbsp ${aqius}`; //Se crea el parrafo
     parrAqi.classList.add('ml-2');  //Se añade esta clase para dejar un pequeño margen entre el icono y el parrafo.
 
+    const divAlarma = document.createElement('div');
+    divAlarma.id = "alarmaICA";
+    divAlarma.appendChild(divIconAQI); //Se añade primero el icono como icono al div con id AQI
+    divAlarma.appendChild(parrAqi); //Se agregan el segundo hijo al div con id AQI
+    divAlarma.classList.add('fila', 'flex-row', 'justify-center', 'items-center', 'alerta-error');
+
+    //Estilos para el id alarmaICA
+    //const estiloICA = document.getElementById('alarmaICA');
+    //const primerhijo = alarmaICA.firstChild;
+
+
     const divAqi = document.createElement('div'); //Se crea el div que contiene el parrafo de ICA. Este div va a ser otro hijo del div con id resultado
 
-    divAqi.appendChild(divIconAQI); //Se añade primero el icono como icono al div con id AQI
-    divAqi.appendChild(parrAqi); //Se agregan el segundo hijo al div con id AQI
+    //divAqi.appendChild(divIconAQI); //Se añade primero el icono como icono al div con id AQI
+    //divAqi.appendChild(parrAqi); //Se agregan el segundo hijo al div con id AQI
+    divAqi.appendChild(divAlarma);
     divAqi.id = "AQI"; //Se da un id al div de AQI.
-    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center');
+    //divAqi.classList.add('mx-8', 'mt-5', 'py-1', 'px-12', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center');
+    divAqi.classList.add('mx-8', 'mt-5', 'py-1', 'px-12', 'text-center', 'text-white', 'text-base');
 
+    //viewResultado.appendChild(divAqi);    //Mostramos lo almacenado en el div padre
     viewResultado.appendChild(divAqi);    //Mostramos lo almacenado en el div padre
 
 };
