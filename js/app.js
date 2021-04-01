@@ -303,19 +303,20 @@ function mostrarAqi(datosAir){
 
     //console.log(aqius); //Se uso para verificar el dato que llega del json en la variable aqius.
 
-    const divIconAQI = document.createElement('div');
-    divIconAQI.id = "IconoHoja"
-    divIconAQI.innerHTML = `<span class="iconify" data-icon="fa-solid:leaf" data-inline="false"></span>`;
+    const divIconAQI = document.createElement('div'); //Se crea el div que va a contener a al icono hoja.
+    divIconAQI.id = "IconoHoja"; //Se da nombre al div con id IconoHoja
+    divIconAQI.innerHTML = `<span class="iconify" data-icon="fa-solid:leaf" data-inline="true"></span>`; //Se llama el icono desde Iconify
 
     const parrAqi = document.createElement('p'); //Se crea un elemento parrafo que va a contener el mensaje de -> ICA #
-    parrAqi.innerHTML = `ICA &nbsp ${aqius}`;
+    parrAqi.innerHTML = `ICA &nbsp ${aqius}`; //Se crea el parrafo
+    parrAqi.classList.add('ml-2');  //Se añade esta clase para dejar un pequeño margen entre el icono y el parrafo.
 
     const divAqi = document.createElement('div'); //Se crea el div que contiene el parrafo de ICA. Este div va a ser otro hijo del div con id resultado
 
-    divAqi.appendChild(divIconAQI);
-    divAqi.appendChild(parrAqi); //Se agregan hijos al div
-    divAqi.id = "AQI"; //Se da un id al div de AQI
-    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base');
+    divAqi.appendChild(divIconAQI); //Se añade primero el icono como icono al div con id AQI
+    divAqi.appendChild(parrAqi); //Se agregan el segundo hijo al div con id AQI
+    divAqi.id = "AQI"; //Se da un id al div de AQI.
+    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center');
 
     viewResultado.appendChild(divAqi);    //Mostramos lo almacenado en el div padre
 
