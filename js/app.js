@@ -280,19 +280,39 @@ function mostrarIpGeo(dato){
     translate(arrayFullData[0]); //Se envia el nombre del dia a traduccion
     translate(arrayMontDate[1]); //Se envia el nombre del mes a traduccion
 
+    const divIconReloj = document.createElement('div'); //Se crea el div que va a contener al icono reloj.
+    divIconReloj.id = "IconReloj"; //Se da nombre al div con id IconoReloj
+    divIconReloj.innerHTML = `<span class="iconify" data-icon="fa-solid:clock" data-inline="true"></span>`; //Se llama el icono desde Iconify
+    
     const parrElementUno = document.createElement('p'); //Se crea un elemento parrafo que va a contener el mensaje de -> Hora local: 55:55:55
     parrElementUno.innerHTML= `Hora local: ${arrayYearTime[2]}`;
+    parrElementUno.classList.add('ml-2');  //Se añade esta clase para dejar un pequeño margen entre el icono y el parrafo.
+
+    const horaLocal = document.createElement('div'); //Se crea el div que contiene el parrafos de hora y el icono. Este div va a ser un hijo del div con id agrupar
+    horaLocal.id= "horaLocal"; 
+    horaLocal.appendChild(divIconReloj); //Se añade primero el icono al div con id hora
+    horaLocal.appendChild(parrElementUno); //Se agregan hijos al div
+    horaLocal.classList.add('mx-8', 'mt-8', 'p-1', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center');
+
+    const divIconCal = document.createElement('div'); //Se crea el div que va a contener al icono calendario.
+    divIconCal.id = "IconCalendario"; //Se da nombre al div con id IconCalendario
+    divIconCal.innerHTML = `<span class="iconify" data-icon="fa-solid:calendar-alt" data-inline="true"></span>`; //Se llama el icono desde Iconify
 
     const parrElementDos = document.createElement('p'); //Se crea un elemento parrafo que va a contener el mensaje de -> Fecha local: nombDia, numDia de numbMes del año
     parrElementDos.innerHTML= `Fecha local: ${nombDia}, ${arrayMontDate[2]} de ${nombMes} del ${arrayYearTime[1]}`;
+    parrElementDos.classList.add('ml-2');  //Se añade esta clase para dejar un pequeño margen entre el icono y el parrafo.
+     
+    const fechaLocal = document.createElement('div'); //Se crea el div que contiene el parrafo de fecha y el icono. Este div va a ser el otro hijo del div con id agrupar
+    fechaLocal.appendChild(divIconCal);
+    fechaLocal.appendChild(parrElementDos);
+    fechaLocal.classList.add('mx-8', 'mt-2', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center');
 
-    const horaLocal = document.createElement('div'); //Se crea el div que contiene los parrafos de hora y fecha. Este div va a ser otro hijo del div con id resultado
-    horaLocal.appendChild(parrElementUno); //Se agregan hijos al div 
-    horaLocal.appendChild(parrElementDos);
-    horaLocal.classList.add('mx-8', 'mt-8', 'p-1', 'text-center', 'text-white', 'text-base');
+    const agrupar = document.createElement('div');
+    agrupar.id= "agrupar";
+    agrupar.appendChild(horaLocal);
+    agrupar.appendChild(fechaLocal);
     
-    viewResultado.appendChild(horaLocal); //Mostramos lo almacenado en el div padre
-
+    viewResultado.appendChild(agrupar); //Mostramos lo almacenado en el div padre.
 
 };
 
