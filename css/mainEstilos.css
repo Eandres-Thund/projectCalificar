@@ -121,21 +121,6 @@ main #resultado img{
 	border-color:#f5c6cb;
 }
 
-#alarmaICA{
-  position: relative;
-  max-width: 120px;
-  left: 240px;
-  border: 1px solid transparent;
-  border-radius: 20px;  
-}
-
-.alarma-DagnGrup{  
-  background-color:#f8d7da;
-  border-color:#f5c6cb;
-}
-
-
-
 /* * ============================== */
 /* * ======== ALARMA ICA ========== */
 /* * ============================== */
@@ -143,11 +128,15 @@ main #resultado img{
 #alarmaICA{
   position: relative;
   max-width: 120px;  
-  left: 190px;
+  left: 240px;
   border:1px solid transparent;
-	border-radius: 4px;
+	border-radius: 20px;
 }
 
+.alarma-init{  
+  background-color: #000/*#f8d7da*/;
+  border-color: #000/*#f5c6cb*/;
+}
 
 
 /* * ============================== */

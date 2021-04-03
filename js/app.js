@@ -324,20 +324,33 @@ function mostrarAqi(datosAir){
     parrAqi.innerHTML = `ICA &nbsp ${aqius}`; //Se crea el parrafo
     parrAqi.classList.add('ml-2');  //Se añade esta clase para dejar un pequeño margen entre el icono y el parrafo.
 
-    const divAlarma = document.createElement('div');
-    divAlarma.id = "alarmaICA";
-    divAlarma.appendChild(divIconAQI); //Se añade primero el icono como icono al div con id AQI
-    divAlarma.appendChild(parrAqi); //Se agregan el segundo hijo al div con id AQI
-    divAlarma.classList.add('fila', 'flex-row', 'justify-center', 'items-center', 'alerta-error');
-
-
-
     const divAqi = document.createElement('div'); //Se crea el div que contiene el parrafo de ICA. Este div va a ser otro hijo del div con id resultado
 
     divAqi.appendChild(divIconAQI); //Se añade primero el icono como icono al div con id AQI
     divAqi.appendChild(parrAqi); //Se agregan el segundo hijo al div con id AQI
     divAqi.id = "alarmaICA"; //Se da un id al div de AQI.
-    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center','alarma-DagnGrup');
+    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center', 'alarma-init');
+
+    //If anidado para colocar el fondo de color de borde segun el valor de ICA
+    if(aqius>=0 && aqius<=50){  //Valores de ICA Buenos
+        divAqi.style.backgroundColor = "#d4edda";   //Color Light grayish lime green.
+        divAqi.style.borderColor = "#c3e6cb";       //Color Grayish lime green.
+    }else if(aqius>50 && aqius<=100){ //Valores de ICA Moderado
+        divAqi.style.backgroundColor = "#fff3cd";   //Color Very pale yellow.
+        divAqi.style.borderColor = "#ffeeba";       //Color Pale yellow.
+    }else if(aqius>100 && aqius<=150){ //Valores de ICA Daniño grupos sensibles
+        divAqi.style.backgroundColor = "#ffd589";   //Color Very light orange
+        divAqi.style.borderColor = "ffc14e";        //Color Light orange
+    }else if(aqius>150 && aqius<=200){ //Valores de ICA Dañino para la salud
+        divAqi.style.backgroundColor = "#f8d7da";   //Color Light grayish red.
+        divAqi.style.borderColor = "#f5c6cb";       //Color Grayish red.
+    }else if(aqius>200 && aqius<=300){ //Valores de ICA Muy dañino para la salud.
+        divAqi.style.backgroundColor = "#e6cdff";   //Color Very pale violet.
+        divAqi.style.borderColor = "#cc9aff";       //Color Pale violet.
+    }else if(aqius>300){ //Valores de ICA Peligroso
+        divAqi.style.backgroundColor = "#800020";   //Color Dark red. Simula el granate del rango
+        divAqi.style.borderColor = "#4d0013";       //Color Very dark red.
+    }
 
     viewResultado.appendChild(divAqi);    //Mostramos lo almacenado en el div padre
 
