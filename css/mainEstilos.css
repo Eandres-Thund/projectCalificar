@@ -123,6 +123,21 @@ main #resultado img{
 	letter-spacing: .5px;
 }
 
+#alarmaICA{
+  position: relative;
+  max-width: 120px;
+  left: 240px;
+  border: 1px solid transparent;
+  border-radius: 20px;  
+}
+
+.alarma-DagnGrup{  
+  background-color:#f8d7da;
+  border-color:#f5c6cb;
+}
+
+
+
 /* * ============================== */
 /* * ==== COLOCAR ELEMENTOS DE ==== */
 /* * ===== RESULTADOS EN FILA ===== */

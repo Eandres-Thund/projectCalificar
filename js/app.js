@@ -335,8 +335,8 @@ function mostrarAqi(datosAir){
 
     divAqi.appendChild(divIconAQI); //Se añade primero el icono como icono al div con id AQI
     divAqi.appendChild(parrAqi); //Se agregan el segundo hijo al div con id AQI
-    divAqi.id = "AQI"; //Se da un id al div de AQI.
-    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center');
+    divAqi.id = "alarmaICA"; //Se da un id al div de AQI.
+    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center','alarma-DagnGrup');
 
     viewResultado.appendChild(divAqi);    //Mostramos lo almacenado en el div padre
 
