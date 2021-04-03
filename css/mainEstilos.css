@@ -91,7 +91,7 @@ main #resultado img{
 	margin-top: 35px;
 	margin-bottom: 20px;
 	min-width: 40%; /*Modifico el tamaño a lo ancho del boton*/
-	background: #e36454;
+	background: #e36454; /*Color Soft red*/
 	padding: 12px;
 	letter-spacing: 2px; /*Espaciado de letra*/
 	color:#ffff;

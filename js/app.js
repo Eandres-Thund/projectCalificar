@@ -15,12 +15,29 @@ const formulario = document.querySelector('#formulario'); //Selecciona el fomula
 const mainPage = document.querySelector('#clima'); //Selecciona el contenedor ppal de la pagina.
 const viewResultado = document.querySelector('#resultado'); //Selecciona el espacio donde se mostrara el resultado de la obtencion del clima
 
+const obtener = document.querySelector('.buscarClima');
+//console.log(obtener);
+
 /****************************************/
 /**************** Evento ****************/
 /****************************************/
-window.addEventListener('load', () =>{ //Espera a que la pagina html este realmente cargada.
-    formulario.addEventListener('submit', buscarClima); //Al enviar el formulario el contenido del formulario.
-});
+escucharEventos();
+
+function escucharEventos(){
+
+    window.addEventListener('load', () =>{ //Espera a que la pagina html este realmente cargada.
+        formulario.addEventListener('submit', buscarClima); //Al enviar el formulario el contenido del formulario.
+    });
+
+    obtener.addEventListener('mouseenter', () =>{ //Evento del mouse ingresar al submit 
+        obtener.style.backgroundColor= "#f5c8c2"; //Color Very soft red
+    });
+
+    obtener.addEventListener('mouseleave', () =>{ //Evento del mouse dejar al submit 
+        obtener.style.backgroundColor= "#e36454"; //Color Soft red
+    });
+
+}
 
 /****************************************/
 /************** Funciones ***************/
