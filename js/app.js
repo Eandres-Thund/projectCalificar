@@ -63,6 +63,7 @@ function buscarClima(evt){
     //Condicion de alerta cuando ingresan numeros en ciudad
     if(ciudad >= 0 || ciudad < 0){
         delete ciudad;
+        delete pais;
         mostrarError("Ingreso numeros en el campo de Ciudad");
         return;
     };
@@ -400,6 +401,8 @@ function mostrarAqi(datosAir){
         divAqi.style.borderColor = "#4d0013";       //Color Very dark red.
 
         parrDosAqi.textContent = `Categoria: Peligroso`;
+    }else{
+        mostrarError("Valores de ICA sin categoria");
     }
 
     viewResultado.appendChild(divAqiAll);    //Mostramos lo almacenado en el div padre
