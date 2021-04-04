@@ -340,8 +340,7 @@ function mostrarAqi(datosAir){
     parrAqi.innerHTML = `ICA &nbsp ${aqius}`; //Se crea el parrafo
     parrAqi.classList.add('ml-2');  //Se añade esta clase para dejar un pequeño margen entre el icono y el parrafo.
 
-    const parrDosAqi = document.createElement('h3'); //Se crea un elemento header 3 el mensaje -> rango: "valoracion";
-    parrDosAqi.textContent = `Ventana emergente`; //Se copia el contenido del header3 a mostrar
+    const parrDosAqi = document.createElement('h3'); //Se crea un elemento header 3 el mensaje -> "categoria: 'valoracion';
 
     const divparrDosAqi = document.createElement('div'); //Se crea un elemento div con id popUpICA que sera hijo del div id divAqiAll
     divparrDosAqi.id= "popUpICA"; //Se da id al div creado hace un momento.
@@ -354,7 +353,7 @@ function mostrarAqi(datosAir){
     divAqi.appendChild(parrAqi); //Se agregan el segundo hijo al div con id alarmaICA
     
     divAqi.id = "alarmaICA"; //Se da un id al div de alarmaICA.
-    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center', 'alarma-init');
+    divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-xl', 'fila', 'flex-row', 'justify-center', 'items-center', 'alarma-init');
 
     const divAqiAll = document.createElement('div'); //Se crea un div que va a ser padre de los div alarmaICA y popUpICA
     divAqiAll.id= "resultadoICA"; //Con identificacion resultadoICA
@@ -363,25 +362,44 @@ function mostrarAqi(datosAir){
     divAqiAll.appendChild(divparrDosAqi);   /*Se agrega 2do hijo*/
     
 
-    //If anidado para colocar el fondo de color de borde segun el valor de ICA
+    //If anidado para modificar el fondo de color de borde y el mensaje del popUpICA segun el valor de ICA.
     if(aqius>=0 && aqius<=50){  //Valores de ICA Buenos
         divAqi.style.backgroundColor = "#d4edda";   //Color Light grayish lime green.
         divAqi.style.borderColor = "#c3e6cb";       //Color Grayish lime green.
+
+        parrDosAqi.textContent = `Categoria: Buena`;
+
     }else if(aqius>50 && aqius<=100){ //Valores de ICA Moderado
         divAqi.style.backgroundColor = "#fff3cd";   //Color Very pale yellow.
         divAqi.style.borderColor = "#ffeeba";       //Color Pale yellow.
+
+        parrDosAqi.textContent = `Categoria: Moderada`;
+
     }else if(aqius>100 && aqius<=150){ //Valores de ICA Daniño grupos sensibles
         divAqi.style.backgroundColor = "#ffd589";   //Color Very light orange
         divAqi.style.borderColor = "ffc14e";        //Color Light orange
+
+        parrDosAqi.textContent = `Categoria: Dañino
+                                    grupos sensibles`;
+
     }else if(aqius>150 && aqius<=200){ //Valores de ICA Dañino para la salud
         divAqi.style.backgroundColor = "#f8d7da";   //Color Light grayish red.
         divAqi.style.borderColor = "#f5c6cb";       //Color Grayish red.
+
+        parrDosAqi.textContent = `Categoria: Dañino
+                                    para todos`;
+
     }else if(aqius>200 && aqius<=300){ //Valores de ICA Muy dañino para la salud.
         divAqi.style.backgroundColor = "#e6cdff";   //Color Very pale violet.
         divAqi.style.borderColor = "#cc9aff";       //Color Pale violet.
+
+        parrDosAqi.textContent = `Categoria: Muy dañino`; 
+
     }else if(aqius>300){ //Valores de ICA Peligroso
         divAqi.style.backgroundColor = "#800020";   //Color Dark red. Simula el granate del rango
         divAqi.style.borderColor = "#4d0013";       //Color Very dark red.
+
+        parrDosAqi.textContent = `Categoria: Peligroso`;
     }
 
     viewResultado.appendChild(divAqiAll);    //Mostramos lo almacenado en el div padre

@@ -108,14 +108,14 @@ main #resultado img{
 /* * ============================== */
 /* * ========== ALERTA ============ */
 /* * ============================== */
-.alerta{
+.alerta{ /*config de la ventana de error*/
 	position:relative;
 	padding: 12px 20px;
 	border:1px solid transparent;
 	border-radius: 4px;
 }
 
-.alerta-error{
+.alerta-error{ /*config del interior de la ventana de error*/
 	color:#721c24;
 	background-color:#f8d7da;
 	border-color:#f5c6cb;
@@ -125,32 +125,35 @@ main #resultado img{
 /* * ======== ALARMA ICA ========== */
 /* * ============================== */
 
-#alarmaICA{
+#alarmaICA{ /*Configura un borde que al interior contiene el valor de ICA*/
   position: relative;
-  max-width: 120px;  
-  /*left: 240px;*/
+  max-width: 300px;  
+  left: 110px;  /*Se usa para centrar el valor de ICA es decir su div*/
   border:1px solid transparent;
 	border-radius: 20px;
 }
 
-.alarma-init{  
-  background-color: #000/*#f8d7da*/;
-  border-color: #000/*#f5c6cb*/;
+.alarma-init{  /*Inicializa los valores de estilos background y border color*/
+  background-color: #000;
+  border-color: #000; /*Estodos estilo se modifican en el js*/
 }
 
-#resultadoICA .popUpICa{
-  background: #f8f8f8;
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0, 0.3);
+#resultadoICA .popUpICa{ /*Da estilos o configura la ventana popUp de ICA*/
+  background: #f8f8f8; /*Color de fondo Very light gray (mostly white)*/
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0, 0.3); /*Se muestra una pequeña sombra de color negro con un pequeña transparencia del 30%, en la ventana emergente de ICA*/
   border-radius: 3px;
-  padding: 10px;
+  padding: 4px;
   text-align: center;
   width: 200px;
-  visibility: hidden;
+  visibility: hidden; /*Esconde el texto al iniciar el html*/
+
+  position: relative; /*Al correr el resultado de ICA es necesario tambien correr la posicion de la ventana popUp de con informacion de ICA */
+  left: 90px;
 }
 
-.popUpICa h3{
+.popUpICa h3{ /*Se da estilos al h3, que escribe la informacion de la categoria de ICA*/
   font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   height: auto;
 }
 
@@ -161,7 +164,7 @@ main #resultado img{
 /* * ============================== */
 .fila{
 	display: flex;
-	flex-wrap: nowrap;
+	flex-wrap: nowrap; /*Coloca los elementos presentes uno al lado del otro*/
 }
 
 
