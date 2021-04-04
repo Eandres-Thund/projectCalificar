@@ -15,11 +15,10 @@ const formulario = document.querySelector('#formulario'); //Selecciona el fomula
 const mainPage = document.querySelector('#clima'); //Selecciona el contenedor ppal de la pagina.
 const viewResultado = document.querySelector('#resultado'); //Selecciona el espacio donde se mostrara el resultado de la obtencion del clima
 
-const obtener = document.querySelector('.buscarClima');
-//console.log(obtener);
+const obtener = document.querySelector('.buscarClima'); //Selecciona el boton tipo summit.
 
 /****************************************/
-/**************** Evento ****************/
+/************** Eventos DOM *************/
 /****************************************/
 escucharEventos();
 
@@ -30,7 +29,7 @@ function escucharEventos(){
     });
 
     obtener.addEventListener('mouseenter', () =>{ //Evento del mouse ingresar al submit 
-        obtener.style.backgroundColor= "#f5c8c2"; //Color Very soft red
+        obtener.style.backgroundColor= "#ea8c80"; //Color light soft red
     });
 
     obtener.addEventListener('mouseleave', () =>{ //Evento del mouse dejar al submit 
@@ -341,12 +340,28 @@ function mostrarAqi(datosAir){
     parrAqi.innerHTML = `ICA &nbsp ${aqius}`; //Se crea el parrafo
     parrAqi.classList.add('ml-2');  //Se añade esta clase para dejar un pequeño margen entre el icono y el parrafo.
 
-    const divAqi = document.createElement('div'); //Se crea el div que contiene el parrafo de ICA. Este div va a ser otro hijo del div con id resultado
+    const parrDosAqi = document.createElement('h3'); //Se crea un elemento header 3 el mensaje -> rango: "valoracion";
+    parrDosAqi.textContent = `Ventana emergente`; //Se copia el contenido del header3 a mostrar
 
-    divAqi.appendChild(divIconAQI); //Se añade primero el icono como icono al div con id AQI
-    divAqi.appendChild(parrAqi); //Se agregan el segundo hijo al div con id AQI
-    divAqi.id = "alarmaICA"; //Se da un id al div de AQI.
+    const divparrDosAqi = document.createElement('div'); //Se crea un elemento div con id popUpICA que sera hijo del div id divAqiAll
+    divparrDosAqi.id= "popUpICA"; //Se da id al div creado hace un momento.
+    divparrDosAqi.classList.add("popUpICa"); //Se agrega la clase popUpICa que esta en el mainEstilos.css
+    divparrDosAqi.appendChild(parrDosAqi); //Se agrega el header como hijo al div con id popUpICA.
+
+
+    const divAqi = document.createElement('div'); //Se crea el div que contiene el parrafo de ICA. Este div va a ser otro hijo del div con id resultado
+    divAqi.appendChild(divIconAQI); //Se añade primero el icono como icono al div con id alarmaICA
+    divAqi.appendChild(parrAqi); //Se agregan el segundo hijo al div con id alarmaICA
+    
+    divAqi.id = "alarmaICA"; //Se da un id al div de alarmaICA.
     divAqi.classList.add('mx-8', 'mt-5', 'p-1', 'text-center', 'text-white', 'text-base', 'fila', 'flex-row', 'justify-center', 'items-center', 'alarma-init');
+
+    const divAqiAll = document.createElement('div'); //Se crea un div que va a ser padre de los div alarmaICA y popUpICA
+    divAqiAll.id= "resultadoICA"; //Con identificacion resultadoICA
+    divAqiAll.classList.add('fila', 'flex-row', 'justify-center', 'items-center');
+    divAqiAll.appendChild(divAqi); /*Se agrega el 1er hijo*/
+    divAqiAll.appendChild(divparrDosAqi);   /*Se agrega 2do hijo*/
+    
 
     //If anidado para colocar el fondo de color de borde segun el valor de ICA
     if(aqius>=0 && aqius<=50){  //Valores de ICA Buenos
@@ -369,7 +384,19 @@ function mostrarAqi(datosAir){
         divAqi.style.borderColor = "#4d0013";       //Color Very dark red.
     }
 
-    viewResultado.appendChild(divAqi);    //Mostramos lo almacenado en el div padre
+    viewResultado.appendChild(divAqiAll);    //Mostramos lo almacenado en el div padre
+
+/****************************************/
+/******** Eventos fuera del DOM *********/
+/****************************************/
+
+    divAqi.addEventListener('mouseenter',()=>{ /*Si entra el cursor al div id=alarmaICA muestra la ventana emergente, con informacion de valoracion del ICA*/
+        divparrDosAqi.style.visibility= "visible";
+    });
+
+    divAqi.addEventListener('mouseleave',()=>{ /*Si sale el cursor del div id=alarmaICA esconde la ventana emergente, con informacion de valoracion del ICA*/
+        divparrDosAqi.style.visibility= "hidden";
+    });
 
 };
 

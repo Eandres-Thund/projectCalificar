@@ -128,7 +128,7 @@ main #resultado img{
 #alarmaICA{
   position: relative;
   max-width: 120px;  
-  left: 240px;
+  /*left: 240px;*/
   border:1px solid transparent;
 	border-radius: 20px;
 }
@@ -136,6 +136,22 @@ main #resultado img{
 .alarma-init{  
   background-color: #000/*#f8d7da*/;
   border-color: #000/*#f5c6cb*/;
+}
+
+#resultadoICA .popUpICa{
+  background: #f8f8f8;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0, 0.3);
+  border-radius: 3px;
+  padding: 10px;
+  text-align: center;
+  width: 200px;
+  visibility: hidden;
+}
+
+.popUpICa h3{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  height: auto;
 }
 
 
