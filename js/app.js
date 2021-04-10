@@ -36,7 +36,7 @@ function escucharEventos(){
         obtener.style.backgroundColor= "#e36454"; //Color Soft red
     });
 
-}
+} //Muy bien usados los Eventos. Diego B.
 
 /****************************************/
 /************** Funciones ***************/
@@ -44,7 +44,7 @@ function escucharEventos(){
 
 //Funcion para el evento de buscar el clima
 function buscarClima(evt){
-    evt.preventDefault(); //Evita elefecto burbuja y siempre llamar al usar los valores del contenido de un formulario.
+    evt.preventDefault(); //Evita el efecto burbuja y siempre llamar al usar los valores del contenido de un formulario.
     //console.log("Buscando clima.."); //Probamos si sale msj, al presionar el submmit del formulario.
 
     //Validar la info almacenada en los campos de "Escriba la ciudad" y "Seleccione pais"
@@ -65,11 +65,11 @@ function buscarClima(evt){
         delete ciudad;
         delete pais;
         mostrarError("Ingreso numeros en el campo de Ciudad");
-        return;
+        return;//Excelente Adicion
     };
 
     //Evita error 401 por envio incorrecto de url en las APIs (particular: OpenWeather); ciudades con espacio ej: Hong Kong devuelve Hong+kong
-    let ciudadUrl = ciudad.replace(/ /g,"+");
+    let ciudadUrl = ciudad.replace(/ /g,"+");//Excelente adicion
 
     //Se llama la funcion que accede a la API de OpenWeather
     consultarAPIClima(ciudadUrl,pais);
@@ -163,8 +163,8 @@ function consultarIpGeolocation (ciudad,pais){
 //Esta funcion verifica si hay conexion y los datos de la API IQAir fueron entregados correctamente
 function consultarCalidadAir(latitud,longitud){
     const appAqiID = 'b6eebd88-c262-43c7-bf68-7dda51d366ed'; //KeyAPI de IQAir API;
-    const urlCalidadAir = `http://api.airvisual.com/v2/nearest_city?lat=${latitud}&lon=${longitud}&key=${appAqiID}`;
-    
+    const urlCalidadAir = `https://api.airvisual.com/v2/nearest_city?lat=${latitud}&lon=${longitud}&key=${appAqiID}`;
+    //el error de que NETLIFY  no te lo mostrara es por que netlify rechaza request no seguras
     console.log(urlCalidadAir);
 
     fetch(urlCalidadAir)
